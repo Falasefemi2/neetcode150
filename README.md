@@ -72,7 +72,7 @@ neetcode150/
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/falasefemi2/neetcode150.git
+   git clone https://github.com/Falasefemi2/neetcode150.git
    cd neetcode150
    ```
 
