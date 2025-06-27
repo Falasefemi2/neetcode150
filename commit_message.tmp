@@ -1,0 +1,5 @@
+feat: Add explanations for questions 1-10
+
+- Updated `ExplamationNote.md` with detailed, beginner-friendly explanations for all existing questions (1-10).
+- Added solutions for `Question9` (Longest Consecutive Sequence) and `Question10` (Valid Palindrome).
+- Formatted explanations with analogies and step-by-step methods to improve clarity for new learners.

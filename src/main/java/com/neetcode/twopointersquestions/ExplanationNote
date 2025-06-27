@@ -1,0 +1,26 @@
+<!-- @format -->
+
+### Question 10: Valid Palindrome
+
+**Goal:** Check if a given string is a palindrome, meaning it reads the same forwards and backward. You should ignore all non-alphanumeric characters (like spaces, punctuation) and treat uppercase and lowercase letters as the same.
+
+**Analogy:** You have a sentence, and you want to see if it's a "mirror image" of itself, but you're allowed to ignore spaces and punctuation, and you don't care about capitalization.
+
+**Method: The Two-Pointers Approach**
+
+This is a classic and highly efficient way to solve palindrome problems. It involves checking the string from both ends and meeting in the middle.
+
+- **Why this method?** If a string is a palindrome, the character at the very beginning must match the one at the very end, the second character must match the second-to-last, and so on. The two-pointers technique does exactly this comparison.
+
+- **Steps:**
+  1.  **Clean the string:** First, prepare the string for a fair comparison.
+      - Remove all characters that are not letters or numbers.
+      - Convert the entire string to lowercase to ensure the comparison is case-insensitive (so 'A' matches 'a').
+  2.  **Set up the pointers:** Create two "pointers" (which are just variables holding an index).
+      - `left`: Starts at the very beginning of the cleaned string (index 0).
+      - `right`: Starts at the very end of the cleaned string.
+  3.  **Meet in the middle:** Loop as long as the `left` pointer is to the left of the `right` pointer.
+  4.  **Compare the characters:** In each step of the loop, compare the character at the `left` pointer with the character at the `right` pointer.
+      - **Not a match?** If they are not the same at any point, you know it's not a palindrome. You can stop immediately and return `false`.
+      - **They match!** If they are the same, move both pointers one step closer to the center: increment `left` and decrement `right`.
+  5.  **Finish the loop:** If the loop completes without ever finding a mismatch, it means the string is a palindrome. Return `true`.
