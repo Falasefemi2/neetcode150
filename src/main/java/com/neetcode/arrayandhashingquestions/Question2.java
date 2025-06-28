@@ -1,15 +1,20 @@
 package com.neetcode.arrayandhashingquestions;
 
-import java.util.Arrays;
-
 public class Question2 {
     public boolean isAnagram(String s, String t) {
-        char[] array1 = s.toLowerCase().toCharArray();
-        char[] array2 = t.toLowerCase().toCharArray();
+        if (s.length() != t.length())
+            return false;
 
-        Arrays.sort(array1);
-        Arrays.sort(array2);
+        int[] count = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
+        }
 
-        return Arrays.equals(array1, array2);
+        for (int c : count) {
+            if (c != 0)
+                return false;
+        }
+        return true;
     }
 }

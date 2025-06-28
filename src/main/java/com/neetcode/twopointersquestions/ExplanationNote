@@ -24,3 +24,53 @@ This is a classic and highly efficient way to solve palindrome problems. It invo
       - **Not a match?** If they are not the same at any point, you know it's not a palindrome. You can stop immediately and return `false`.
       - **They match!** If they are the same, move both pointers one step closer to the center: increment `left` and decrement `right`.
   5.  **Finish the loop:** If the loop completes without ever finding a mismatch, it means the string is a palindrome. Return `true`.
+
+### Question 11: Two Sum II - Input Array is Sorted
+
+**Goal:** Given a **sorted** list of numbers, find two numbers that add up to a specific target. Unlike the original "Two Sum," this array is guaranteed to be sorted, and you need to return the 1-based indices.
+
+**Analogy:** You are looking for two specific page numbers in a book that add up to a target number. Because the page numbers are already in order, you can be very efficient. You open the book to the first page (`left` pointer) and the last page (`right` pointer).
+
+**Method: The Two-Pointers Approach (Converging Pointers)**
+
+This method is extremely efficient for sorted arrays because it eliminates the need to check every pair.
+
+- **Why this method?** Since the array is sorted, if your current sum is too small, you know you need a larger number. You can get one by moving the `left` pointer to the right. If the sum is too big, you need a smaller number, which you can get by moving the `right` pointer to the left.
+
+- **Steps:**
+  1.  **Set up the pointers:**
+      - `left`: Starts at the very beginning of the array (index 0).
+      - `right`: Starts at the very end of the array.
+  2.  **Loop and check the sum:** Loop as long as the `left` pointer is to the left of the `right` pointer.
+      - Calculate the `sum` of the numbers at the `left` and `right` pointers.
+  3.  **Compare and move:**
+      - **Found it!** If `sum` equals the `target`, you've found the pair. Return their indices (remembering to add 1 to each, as the problem asks for 1-based indexing).
+      - **Sum is too small:** If `sum` is less than the `target`, you need a bigger sum. Move the `left` pointer one step to the right to include a larger number in the next calculation.
+      - **Sum is too large:** If `sum` is greater than the `target`, you need a smaller sum. Move the `right` pointer one step to the left to include a smaller number.
+  4.  **No solution:** If the loop finishes, it means no such pair exists.
+
+### Question 12: 3Sum
+
+**Goal:** Find all unique combinations of three different numbers in a list that add up to zero.
+
+**Analogy:** You have a list of positive and negative numbers representing financial transactions. You need to find all unique sets of three transactions that perfectly cancel each other out (sum to zero).
+
+**Method: Sort and Two-Pointers**
+
+This method cleverly reduces the "3Sum" problem into a series of "2Sum" problems.
+
+- **Why this method?** By sorting the array first, we can iterate through it and, for each number, use the efficient two-pointer technique on the rest of the array to find the other two numbers. Sorting also makes it much easier to handle duplicates.
+
+- **Steps:**
+  1.  **Sort the list:** First, sort the entire input list of numbers. This is crucial.
+  2.  **Main loop:** Loop through the sorted list with a pointer `i`. The number `nums[i]` will be the first potential element of a triplet.
+      - **Skip duplicates:** If the current number is the same as the one before it, skip it to avoid creating duplicate triplets.
+  3.  **Solve the "2Sum" sub-problem:** For each `nums[i]`, we need to find two other numbers in the rest of the list that sum to `-nums[i]`.
+      - Set up two more pointers: `left` (starts right after `i`) and `right` (starts at the end of the list).
+      - **Loop with the two pointers:**
+        a. Calculate the `sum` of `nums[i]`, `nums[left]`, and `nums[right]`.
+        b. **Found a triplet!** If `sum` is zero, you've found a valid triplet. Add it to your results.
+           - **Crucially, skip inner duplicates:** After finding a triplet, move the `left` and `right` pointers inward, but keep moving them as long as they point to duplicate numbers. This ensures you don't add the same triplet multiple times (e.g., `[-1, 0, 1]` from `[-1, 0, 0, 1, 1]`).
+        c. **Sum is too small:** If `sum` is less than zero, move the `left` pointer to the right to get a larger sum.
+        d. **Sum is too large:** If `sum` is greater than zero, move the `right` pointer to the left to get a smaller sum.
+  4.  **Return the result:** Once the main loop is finished, return the list of all unique triplets you found.

@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class Question5 {
     public int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> countsStroe = new HashMap<>();
+        Map<Integer, Integer> countStore = new HashMap<>();
         for (int num : nums) {
-            countsStroe.put(num, countsStroe.getOrDefault(num, 0) + 1);
+            countStore.put(num, countStore.getOrDefault(num, 0) + 1);
         }
 
         List<Integer>[] buckets = new List[nums.length + 1];
-        for (int key : countsStroe.keySet()) {
-            int numAppearance = countsStroe.get(key);
+        for (int key : countStore.keySet()) {
+            int numAppearance = countStore.get(key);
             if (buckets[numAppearance] == null) {
                 buckets[numAppearance] = new ArrayList<>();
             }
@@ -32,6 +32,6 @@ public class Question5 {
                 }
             }
         }
-        return result.stream().mapToInt(i -> i).toArray();
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
