@@ -1,15 +1,17 @@
 package com.neetcode.arrayandhashingquestions;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Question1 {
 
     public boolean hasDuplicate(int[] nums) {
-        Arrays.sort(nums);
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] == nums[i + 1]) {
+        Set<Integer> numStore = new HashSet<>();
+        for (int num : nums) {
+            if (numStore.contains(num)) {
                 return true;
             }
+            numStore.add(num);
         }
         return false;
     }
