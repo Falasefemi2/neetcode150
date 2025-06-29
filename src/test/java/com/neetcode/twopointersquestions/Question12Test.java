@@ -22,4 +22,18 @@ public class Question12Test {
         assertTrue("Result should contain all expected triplets", result.containsAll(expected));
         assertTrue("Result should not contain extra triplets", expected.containsAll(result));
     }
+
+    @Test
+    public void testThreeSumEmptyArray() {
+        int[] input = {};
+        List<List<Integer>> result = question12.threeSum(input);
+        assertTrue("Empty array should return empty result", result.isEmpty());
+    }
+
+    @Test
+    public void testThreeSumNoSolution() {
+        int[] input = { 1, 2, 3 };
+        List<List<Integer>> result = question12.threeSum(input);
+        assertTrue("Array with no valid triplets should return empty result", result.isEmpty());
+    }
 }

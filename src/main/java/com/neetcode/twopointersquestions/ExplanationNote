@@ -74,3 +74,54 @@ This method cleverly reduces the "3Sum" problem into a series of "2Sum" problems
         c. **Sum is too small:** If `sum` is less than zero, move the `left` pointer to the right to get a larger sum.
         d. **Sum is too large:** If `sum` is greater than zero, move the `right` pointer to the left to get a smaller sum.
   4.  **Return the result:** Once the main loop is finished, return the list of all unique triplets you found.
+
+### Question 13: Container With Most Water
+
+**Goal:** Find two lines that, together with the x-axis, form a container that can hold the most water.
+
+**Analogy:** You have a series of vertical bars of different heights. You want to pick two of them to be the sides of a container to hold as much water as possible. The amount of water is limited by the shorter of the two bars and the distance between them.
+
+**Method: The Two-Pointers Approach**
+
+- **Why this method?** A brute-force approach of checking every pair of lines would be too slow. The two-pointer approach is more clever. We start with the widest possible container (the two outermost lines) and gradually move the pointers inward. At each step, we calculate the area and keep track of the maximum. The key insight is that if we move the pointer of the taller line inward, we can't possibly get a larger area, because the width decreases, and the height is still limited by the shorter line. Therefore, we should always move the pointer of the shorter line.
+
+- **Steps:**
+  1.  **Set up the pointers:**
+      - `left`: Starts at the beginning of the array (index 0).
+      - `right`: Starts at the end of the array.
+  2.  **Loop and calculate area:** Loop as long as `left` is less than `right`.
+      - The height of the container is the minimum of the heights at the `left` and `right` pointers.
+      - The width is the distance between the pointers (`right - left`).
+      - Calculate the current area and update the maximum area found so far.
+  3.  **Move the pointers:**
+      - If the height at the `left` pointer is less than the height at the `right` pointer, move the `left` pointer one step to the right.
+      - Otherwise, move the `right` pointer one step to the left.
+  4.  **Return the result:** After the loop finishes, return the maximum area.
+
+### Question 14: Trapping Rain Water
+
+**Goal:** Given an elevation map represented by an array of non-negative integers, compute how much water it can trap after raining.
+
+**Analogy:** Imagine the bars of a histogram. When it rains, water gets trapped between the taller bars. You need to calculate the total volume of trapped water.
+
+**Method: The Two-Pointers Approach**
+
+- **Why this method?** This is a more advanced two-pointer problem. The amount of water trapped at any position is determined by the height of the walls on its left and right. Specifically, it's the minimum of the tallest bar to the left and the tallest bar to the right, minus the height of the current bar. The two-pointer approach provides an efficient way to calculate this without needing to re-scan for the max heights at every position.
+
+- **Steps:**
+  1.  **Set up the pointers and max heights:**
+      - `left`: Starts at the beginning of the array (index 0).
+      - `right`: Starts at the end of the array.
+      - `maxLeft`: Keeps track of the maximum height seen so far from the left. Initialize it with the height at the `left` pointer.
+      - `maxRight`: Keeps track of the maximum height seen so far from the right. Initialize it with the height at the `right` pointer.
+  2.  **Loop and trap water:** Loop as long as `left` is less than `right`.
+  3.  **Compare max heights and move:**
+      - If `maxLeft` is less than `maxRight`, it means the trapping water level on the left side is limited by `maxLeft`.
+        - Move the `left` pointer one step to the right.
+        - Update `maxLeft` to be the maximum of its current value and the height at the new `left` position.
+        - The water trapped at the new `left` position is `maxLeft - height[left]`. Add this to the total trapped water.
+      - Otherwise (if `maxRight` is less than or equal to `maxLeft`), the trapping water level is limited by `maxRight`.
+        - Move the `right` pointer one step to the left.
+        - Update `maxRight` to be the maximum of its current value and the height at the new `right` position.
+        - The water trapped at the new `right` position is `maxRight - height[right]`. Add this to the total trapped water.
+  4.  **Return the result:** After the loop finishes, return the total trapped water.

@@ -1,4 +1,4 @@
-package com.neetcode.twopointers;
+package com.neetcode.twopointersquestions;
 
 import static org.junit.Assert.*;
 
